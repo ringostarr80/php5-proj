@@ -41,17 +41,11 @@ zend_module_entry proj4_module_entry = {
 	STANDARD_MODULE_PROPERTIES
 };
 
-//PHP_INI_BEGIN()
-//	PHP_INI_ENTRY((char *)"proj4.greeting", (char *)"Hello World", PHP_INI_ALL, NULL)
-//	STD_PHP_INI_ENTRY((char *)"proj4.direction", (char *)"1", PHP_INI_ALL, OnUpdateBool, direction, zend_proj4_globals, proj4_globals)
-//PHP_INI_END()
-
 static void php_proj4_dtor(zend_rsrc_list_entry *resource TSRMLS_DC)
 {
 	projPJ *proj = (projPJ*)resource->ptr;
 	if (proj != NULL && proj) {
-		//efree(proj);
-		//pj_free(proj);
+		pj_free(proj);
 	}
 }
 
@@ -63,8 +57,6 @@ PHP_RINIT_FUNCTION(proj4)
 PHP_MINIT_FUNCTION(proj4)
 {
 	le_proj4 = zend_register_list_destructors_ex(php_proj4_dtor, NULL, PHP_PROJ4_RES_NAME, module_number);
-
-	//REGISTER_INI_ENTRIES();
 
 	return SUCCESS;
 }
@@ -235,8 +227,6 @@ ZEND_FUNCTION(pj_free)
 	}
 
 	ZEND_FETCH_RESOURCE(pj, projPJ*, &zpj, -1, PHP_PROJ4_RES_NAME, le_proj4);
-
-	pj_free(pj);
 
 	zend_list_delete(Z_LVAL_P(zpj));
 }
