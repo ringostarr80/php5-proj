@@ -126,9 +126,9 @@ ZEND_FUNCTION(pj_transform)
 	}
 
 	array_init(return_value);
-	add_assoc_double(return_value, "x", x * RAD_TO_DEG);
-	add_assoc_double(return_value, "y", y * RAD_TO_DEG);
-	add_assoc_double(return_value, "z", z * RAD_TO_DEG);
+	add_assoc_double(return_value, "x", x);
+	add_assoc_double(return_value, "y", y);
+	add_assoc_double(return_value, "z", z);
 }
 
 ZEND_FUNCTION(pj_is_latlong)
