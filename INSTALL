@@ -1,6 +1,8 @@
 How to install php5-proj extension
 ----------------------------------
 
+make sure the following package is installed: libproj-dev
+
 1. change to php5-proj source directory
 2. execute `phpize`
 3. execute `./configure`
