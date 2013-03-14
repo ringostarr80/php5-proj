@@ -1,0 +1,8 @@
+proj4.lo: /home/ringo/NetBeansProjects/php5-proj/proj4.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/ringo/NetBeansProjects/php5-proj $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/ringo/NetBeansProjects/php5-proj/proj4.c -o proj4.lo 
+$(phplibdir)/proj4.la: ./proj4.la
+	$(LIBTOOL) --mode=install cp ./proj4.la $(phplibdir)
+
+./proj4.la: $(shared_objects_proj4) $(PROJ4_SHARED_DEPENDENCIES)
+	$(LIBTOOL) --mode=link $(CC) $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS) $(LDFLAGS) -o $@ -export-dynamic -avoid-version -prefer-pic -module -rpath $(phplibdir) $(EXTRA_LDFLAGS) $(shared_objects_proj4) $(PROJ4_SHARED_LIBADD)
+
