@@ -67,7 +67,7 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libphp5-proj.a: ${OBJECTFILES}
 ${OBJECTDIR}/proj4.o: proj4.c 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
-	$(COMPILE.c) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/proj4.o proj4.c
+	$(COMPILE.c) -g -I/usr/include/php5 -I/usr/include/php5/main -I/usr/include/php5/ext -I/usr/include/php5/Zend -I/usr/include/php5/TSRM -MMD -MP -MF $@.d -o ${OBJECTDIR}/proj4.o proj4.c
 
 # Subprojects
 .build-subprojects:

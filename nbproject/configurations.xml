@@ -10,19 +10,19 @@
                    displayName="Resource Files"
                    projectFiles="true">
       <logicalFolder name="f1" displayName="tests" projectFiles="true">
-        <itemPath>pj_free_basic.phpt</itemPath>
-        <itemPath>pj_get_def_basic.phpt</itemPath>
-        <itemPath>pj_get_errno_ref_basic.phpt</itemPath>
-        <itemPath>pj_get_release.phpt</itemPath>
-        <itemPath>pj_init_plus_basic.phpt</itemPath>
-        <itemPath>pj_init_plus_error.phpt</itemPath>
-        <itemPath>pj_is_geocent_basic.phpt</itemPath>
-        <itemPath>pj_is_geocent_error.phpt</itemPath>
-        <itemPath>pj_is_latlong_basic.phpt</itemPath>
-        <itemPath>pj_is_latlong_error.phpt</itemPath>
-        <itemPath>pj_strerrno_basic.phpt</itemPath>
-        <itemPath>pj_transform_basic.phpt</itemPath>
-        <itemPath>pj_transform_error.phpt</itemPath>
+        <itemPath>tests/pj_free_basic.phpt</itemPath>
+        <itemPath>tests/pj_get_def_basic.phpt</itemPath>
+        <itemPath>tests/pj_get_errno_ref_basic.phpt</itemPath>
+        <itemPath>tests/pj_get_release.phpt</itemPath>
+        <itemPath>tests/pj_init_plus_basic.phpt</itemPath>
+        <itemPath>tests/pj_init_plus_error.phpt</itemPath>
+        <itemPath>tests/pj_is_geocent_basic.phpt</itemPath>
+        <itemPath>tests/pj_is_geocent_error.phpt</itemPath>
+        <itemPath>tests/pj_is_latlong_basic.phpt</itemPath>
+        <itemPath>tests/pj_is_latlong_error.phpt</itemPath>
+        <itemPath>tests/pj_strerrno_basic.phpt</itemPath>
+        <itemPath>tests/pj_transform_basic.phpt</itemPath>
+        <itemPath>tests/pj_transform_error.phpt</itemPath>
       </logicalFolder>
       <itemPath>config.m4</itemPath>
     </logicalFolder>
@@ -51,6 +51,24 @@
         <compilerSet>default</compilerSet>
       </toolsSet>
       <compileType>
+        <cTool>
+          <incDir>
+            <pElem>/usr/include/php5</pElem>
+            <pElem>/usr/include/php5/main</pElem>
+            <pElem>/usr/include/php5/ext</pElem>
+            <pElem>/usr/include/php5/Zend</pElem>
+            <pElem>/usr/include/php5/TSRM</pElem>
+          </incDir>
+        </cTool>
+        <ccTool>
+          <incDir>
+            <pElem>/usr/include/php5</pElem>
+            <pElem>/usr/include/php5/main</pElem>
+            <pElem>/usr/include/php5/ext</pElem>
+            <pElem>/usr/include/php5/Zend</pElem>
+            <pElem>/usr/include/php5/TSRM</pElem>
+          </incDir>
+        </ccTool>
         <archiverTool>
         </archiverTool>
       </compileType>
@@ -58,33 +76,33 @@
       </item>
       <item path="php_proj4.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="pj_free_basic.phpt" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="pj_get_def_basic.phpt" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="pj_get_errno_ref_basic.phpt" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="pj_get_release.phpt" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="pj_init_plus_basic.phpt" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="pj_init_plus_error.phpt" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="pj_is_geocent_basic.phpt" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="pj_is_geocent_error.phpt" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="pj_is_latlong_basic.phpt" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="pj_is_latlong_error.phpt" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="pj_strerrno_basic.phpt" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="pj_transform_basic.phpt" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="pj_transform_error.phpt" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="proj4.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="tests/pj_free_basic.phpt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="tests/pj_get_def_basic.phpt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="tests/pj_get_errno_ref_basic.phpt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="tests/pj_get_release.phpt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="tests/pj_init_plus_basic.phpt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="tests/pj_init_plus_error.phpt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="tests/pj_is_geocent_basic.phpt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="tests/pj_is_geocent_error.phpt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="tests/pj_is_latlong_basic.phpt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="tests/pj_is_latlong_error.phpt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="tests/pj_strerrno_basic.phpt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="tests/pj_transform_basic.phpt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="tests/pj_transform_error.phpt" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
     <conf name="Release" type="3">
@@ -112,33 +130,33 @@
       </item>
       <item path="php_proj4.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="pj_free_basic.phpt" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="pj_get_def_basic.phpt" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="pj_get_errno_ref_basic.phpt" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="pj_get_release.phpt" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="pj_init_plus_basic.phpt" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="pj_init_plus_error.phpt" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="pj_is_geocent_basic.phpt" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="pj_is_geocent_error.phpt" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="pj_is_latlong_basic.phpt" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="pj_is_latlong_error.phpt" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="pj_strerrno_basic.phpt" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="pj_transform_basic.phpt" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="pj_transform_error.phpt" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="proj4.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="tests/pj_free_basic.phpt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="tests/pj_get_def_basic.phpt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="tests/pj_get_errno_ref_basic.phpt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="tests/pj_get_release.phpt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="tests/pj_init_plus_basic.phpt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="tests/pj_init_plus_error.phpt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="tests/pj_is_geocent_basic.phpt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="tests/pj_is_geocent_error.phpt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="tests/pj_is_latlong_basic.phpt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="tests/pj_is_latlong_error.phpt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="tests/pj_strerrno_basic.phpt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="tests/pj_transform_basic.phpt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="tests/pj_transform_error.phpt" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
   </confs>
