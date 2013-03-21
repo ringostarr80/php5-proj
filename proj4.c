@@ -17,6 +17,8 @@ static zend_function_entry proj4_functions[] = {
 	ZEND_FE(pj_is_latlong, NULL)
 	ZEND_FE(pj_is_geocent, NULL)
 	ZEND_FE(pj_get_def, NULL)
+	ZEND_FE(pj_latlong_from_proj, NULL)
+	ZEND_FE(pj_deallocate_grids, NULL)
 	ZEND_FE(pj_strerrno, NULL)
 	ZEND_FE(pj_get_errno_ref, NULL)
 	ZEND_FE(pj_get_release, NULL)
@@ -187,6 +189,35 @@ ZEND_FUNCTION(pj_get_def)
 	}
 
 	RETURN_FALSE;
+}
+
+ZEND_FUNCTION(pj_latlong_from_proj)
+{
+	zval *zpj_in;
+	projPJ pj_in, pj;
+
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "r", &zpj_in) == FAILURE) {
+		RETURN_FALSE;
+	}
+
+	ZEND_FETCH_RESOURCE(pj_in, projPJ*, &zpj_in, -1, PHP_PROJ4_RES_NAME, le_proj4);
+
+	if (pj_in != NULL && pj_in) {
+		pj = pj_latlong_from_proj(pj_in);
+
+		if (pj == NULL) {
+			RETURN_FALSE;
+		}
+
+		ZEND_REGISTER_RESOURCE(return_value, pj, le_proj4);
+	} else {
+		RETURN_FALSE;
+	}
+}
+
+ZEND_FUNCTION(pj_deallocate_grids)
+{
+	pj_deallocate_grids();
 }
 
 ZEND_FUNCTION(pj_get_errno_ref)

@@ -24,6 +24,8 @@
         <itemPath>tests/pj_transform_basic.phpt</itemPath>
         <itemPath>tests/pj_transform_error.phpt</itemPath>
       </logicalFolder>
+      <itemPath>INSTALL</itemPath>
+      <itemPath>README.md</itemPath>
       <itemPath>config.m4</itemPath>
     </logicalFolder>
     <logicalFolder name="SourceFiles"
@@ -72,6 +74,10 @@
         <archiverTool>
         </archiverTool>
       </compileType>
+      <item path="INSTALL" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="README.md" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="config.m4" ex="false" tool="3" flavor2="0">
       </item>
       <item path="php_proj4.h" ex="false" tool="3" flavor2="0">
@@ -126,6 +132,10 @@
         <archiverTool>
         </archiverTool>
       </compileType>
+      <item path="INSTALL" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="README.md" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="config.m4" ex="false" tool="3" flavor2="0">
       </item>
       <item path="php_proj4.h" ex="false" tool="3" flavor2="0">
