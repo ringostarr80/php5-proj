@@ -45,9 +45,15 @@ Returns true if the coordinate system is geocentric (proj=geocent).
   
 **string pj_get_def(resource pj, int options);**  
 Returns the PROJ.4 initialization string suitable for use with pj_init_plus() that would produce this coordinate system, but with the definition expanded as much as possible (for instance +init= and +datum= definitions).  
+  
+**resource pj_latlong_from_proj(resource pj_in);**  
+Returns a new coordinate system definition which is the geographic coordinate (lat/long) system underlying pj_in.  
 
 Environment Functions
 ---------------------
+**void pj_deallocate_grids();**  
+Frees all resources associated with loaded and cached datum shift grids.  
+  
 **string pj_strerrno(int);**  
 Returns the error text associated with the passed in error code.  
   
