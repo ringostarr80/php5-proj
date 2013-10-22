@@ -2,10 +2,10 @@
 #include "config.h"
 #endif
 
-#include <php5/main/php.h>
-#include <php5/main/php_main.h>
-#include <php5/main/php_ini.h>
-#include <php5/ext/standard/info.h>
+#include <php.h>
+#include <php_main.h>
+#include <php_ini.h>
+#include <ext/standard/info.h>
 #include <proj_api.h>
 #include "php_proj4.h"
 
