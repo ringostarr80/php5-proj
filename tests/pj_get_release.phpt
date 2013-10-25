@@ -2,7 +2,7 @@
 pj_get_release() function - basic test for pj_get_release()
 --SKIPIF--
 <?php
-if (!extension_loaded('proj.4')) print 'skip proj.4 extension not available';
+if (!extension_loaded('proj.4')) { print 'skip proj.4 extension not available'; }
 ?>
 --FILE--
 <?php

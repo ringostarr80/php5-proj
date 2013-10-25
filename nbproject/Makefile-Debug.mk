@@ -64,10 +64,10 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libphp5-proj.a: ${OBJECTFILES}
 	${AR} -rv ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libphp5-proj.a ${OBJECTFILES} 
 	$(RANLIB) ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libphp5-proj.a
 
-${OBJECTDIR}/proj4.o: proj4.c 
+${OBJECTDIR}/proj4.o: nbproject/Makefile-${CND_CONF}.mk proj4.c 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
-	$(COMPILE.c) -g -I/usr/include/php5 -I/usr/include/php5/main -I/usr/include/php5/ext -I/usr/include/php5/Zend -I/usr/include/php5/TSRM -MMD -MP -MF $@.d -o ${OBJECTDIR}/proj4.o proj4.c
+	$(COMPILE.c) -g -Wall -I/usr/include/php5 -I/usr/include/php5/main -I/usr/include/php5/ext -I/usr/include/php5/Zend -I/usr/include/php5/TSRM -MMD -MP -MF $@.d -o ${OBJECTDIR}/proj4.o proj4.c
 
 # Subprojects
 .build-subprojects:
