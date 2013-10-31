@@ -109,6 +109,10 @@ ZEND_FUNCTION(pj_transform)
 	zval *zpj_latlong, *zpj_merc;
 	projPJ pj_latlong, pj_merc;
 
+	MAKE_STD_ZVAL(zx);
+	MAKE_STD_ZVAL(zy);
+	MAKE_STD_ZVAL(zz);
+
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "rrllzz|z", &zpj_latlong, &zpj_merc, &point_count, &point_offset, &zx, &zy, &zz) == FAILURE) {
 		RETURN_FALSE;
 	}
@@ -116,11 +120,13 @@ ZEND_FUNCTION(pj_transform)
 	ZEND_FETCH_RESOURCE(pj_latlong, projPJ*, &zpj_latlong, -1, PHP_PROJ4_RES_NAME, le_proj4);
 	ZEND_FETCH_RESOURCE(pj_merc, projPJ*, &zpj_merc, -1, PHP_PROJ4_RES_NAME, le_proj4);
 
-	if (point_count != 1) {
-		RETURN_FALSE;
+	array_init(return_value);
+
+	if (point_offset < 0) {
+		point_offset = 0;
 	}
-	if (point_offset != 0 && point_offset != 1) {
-		RETURN_FALSE;
+	if (point_count < 0) {
+		point_count = 0;
 	}
 
 	if ((Z_TYPE_P(zx) == IS_DOUBLE || Z_TYPE_P(zx) == IS_LONG || Z_TYPE_P(zx) == IS_STRING) &&
@@ -142,95 +148,106 @@ ZEND_FUNCTION(pj_transform)
 				break;
 		}
 
-		p = pj_transform(pj_latlong, pj_merc, point_count, point_offset, &x, &y, &z);
+		p = pj_transform(pj_latlong, pj_merc, 1, 0, &x, &y, &z);
+
+		add_assoc_double(return_value, "x", x);
+		add_assoc_double(return_value, "y", y);
+		add_assoc_double(return_value, "z", z);
 	} else if (Z_TYPE_P(zx) == IS_ARRAY && Z_TYPE_P(zy) == IS_ARRAY) {
 		zval **x_data, **y_data, **z_data;
 		HashTable *x_array, *y_array, *z_array;
 		HashPosition x_position, y_position, z_position;
-		int x_count, y_count, z_count = 0, max_count = -1;
+		int x_count, y_count, z_count = 0, max_count = -1, current_array_position = 1, added_array_elements = 0;
 		x_array = Z_ARRVAL_P(zx);
 		y_array = Z_ARRVAL_P(zy);
 		x_count = zend_hash_num_elements(x_array);
 		y_count = zend_hash_num_elements(y_array);
-		php_printf("The x-array passed contains %d elements\n", x_count);
-		php_printf("The y-array passed contains %d elements\n", y_count);
 		if (Z_TYPE_P(zz) == IS_ARRAY) {
 			z_array = Z_ARRVAL_P(zz);
 			z_count = zend_hash_num_elements(z_array);
-			php_printf("The z-array passed contains %d elements\n", z_count);
 		}
 		if (x_count > 0 && y_count > 0) {
 			max_count = (x_count <= y_count) ? x_count : y_count;
 			if (z_count > 0 && z_count < max_count) {
 				max_count = z_count;
 			}
-			php_printf("max_count: %d\n", max_count);
+			if (point_count < max_count) {
+				max_count = point_count;
+			}
+
 			double x_input_array[max_count], y_input_array[max_count], z_input_array[max_count];
-			int current_input_array_position = 0;
+			int current_input_array_index = 0;
 
 			zend_hash_internal_pointer_reset_ex(y_array, &y_position);
-			/*
 			if (z_count > 0) {
 				zend_hash_internal_pointer_reset_ex(z_array, &z_position);
 			}
-			//*/
-			/*
+
+			double current_x = 0, current_y = 0, current_z = 0;
 			for(zend_hash_internal_pointer_reset_ex(x_array, &x_position), zend_hash_internal_pointer_reset_ex(y_array, &y_position);
-				zend_hash_get_current_data_ex(x_array, (void**)&x_data, &x_position) == SUCCESS;
-				zend_hash_move_forward_ex(x_array, &x_position)) {
-				if (Z_TYPE_PP(x_data) == IS_DOUBLE || Z_TYPE_PP(x_data) == IS_LONG || Z_TYPE_PP(x_data) == IS_STRING) {
-					if (zend_hash_get_current_data_ex(x_array, (void**)&x_data, &x_position) == SUCCESS) {
-						zend_hash_move_forward_ex(y_array, &y_position);
+				zend_hash_get_current_data_ex(x_array, (void**)&x_data, &x_position) == SUCCESS && zend_hash_get_current_data_ex(y_array, (void**)&y_data, &y_position) == SUCCESS;
+				zend_hash_move_forward_ex(x_array, &x_position), zend_hash_move_forward_ex(y_array, &y_position), current_array_position++) {
+				if (current_array_position < point_offset + 1) {
+					continue;
+				}
+				if (added_array_elements >= point_count) {
+					break;
+				}
 
-						if (z_count > 0 && zend_hash_get_current_data_ex(z_array, (void**)&z_data, &z_position) == SUCCESS) {
+				if ((Z_TYPE_PP(x_data) == IS_DOUBLE || Z_TYPE_PP(x_data) == IS_LONG || Z_TYPE_PP(x_data) == IS_STRING) &&
+					(Z_TYPE_PP(y_data) == IS_DOUBLE || Z_TYPE_PP(y_data) == IS_LONG || Z_TYPE_PP(y_data) == IS_STRING)) {
+					if (z_count > 0) {
+						if (zend_hash_get_current_data_ex(z_array, (void**)&z_data, &z_position) == SUCCESS) {
+							convert_to_double_ex(z_data);
+							current_z = Z_DVAL_PP(z_data);
 
+							zend_hash_move_forward_ex(z_array, &z_position);
 						} else {
 							RETURN_FALSE;
 						}
-
-						if (Z_TYPE_PP(x_data) == IS_DOUBLE || Z_TYPE_PP(x_data) == IS_LONG || Z_TYPE_PP(x_data) == IS_STRING &&
-							Z_TYPE_PP(y_data) == IS_DOUBLE || Z_TYPE_PP(y_data) == IS_LONG || Z_TYPE_PP(y_data) == IS_STRING
-							) {
-							//convert_to_double_ex(x_data);
-							double current_x = Z_DVAL_PP(x_data);
-							RETURN_DOUBLE(current_x);
-							//convert_to_double_ex(y_data);
-							double current_y = Z_DVAL_PP(y_data);
-
-							/*
-							switch(Z_TYPE_P(zz)) {
-								case IS_DOUBLE:
-									z = Z_DVAL_P(zz);
-									break;
-
-								case IS_LONG:
-								case IS_STRING:
-									convert_to_double_ex(&zz);
-									z = Z_DVAL_P(zz);
-									break;
-							}
-							//
-						} else {
-							RETURN_FALSE;
-						}
-					} else {
-						RETURN_FALSE;
 					}
+
+					if (Z_TYPE_PP(x_data) != IS_DOUBLE) {
+						convert_to_double_ex(x_data);
+					}
+					current_x = Z_DVAL_PP(x_data);
+					if (Z_TYPE_PP(y_data) != IS_DOUBLE) {
+						convert_to_double_ex(y_data);
+					}
+					current_y = Z_DVAL_PP(y_data);
+
+					x_input_array[current_input_array_index] = current_x;
+					y_input_array[current_input_array_index] = current_y;
+					z_input_array[current_input_array_index] = current_z;
+					current_input_array_index++;
+					added_array_elements++;
 				} else {
 					RETURN_FALSE;
 				}
 			}
-			RETURN_LONG(max_count);
-			//*/
+
+			p = pj_transform(pj_latlong, pj_merc, max_count, 0, x_input_array, y_input_array, z_input_array);
+			if (p == 0) {
+				zval *x_array_element, *y_array_element, *z_array_element;
+				ALLOC_INIT_ZVAL(x_array_element);
+				ALLOC_INIT_ZVAL(y_array_element);
+				ALLOC_INIT_ZVAL(z_array_element);
+				array_init(x_array_element);
+				array_init(y_array_element);
+				array_init(z_array_element);
+
+				int i;
+				for(i = 0; i < max_count; i++) {
+					add_next_index_double(x_array_element, x_input_array[i]);
+					add_next_index_double(y_array_element, y_input_array[i]);
+					add_next_index_double(z_array_element, z_input_array[i]);
+				}
+
+				add_assoc_zval(return_value, "x", x_array_element);
+				add_assoc_zval(return_value, "y", y_array_element);
+				add_assoc_zval(return_value, "z", z_array_element);
+			}
 		}
-		/*
-		double *x_array, *y_array, *z_array;
-		x_array = Z_ARRVAL_P(zx);
-		y_array = Z_ARRVAL_P(zy);
-		z_array = Z_ARRVAL_P(zz);
-		p = pj_transform(pj_latlong, pj_merc, point_count, point_offset, &x_array, &y_array, &z_array);
-		*/
-		RETURN_DOUBLE(-1);
 	} else {
 		RETURN_FALSE;
 	}
@@ -238,11 +255,6 @@ ZEND_FUNCTION(pj_transform)
 	if (p != 0) {
 		RETURN_DOUBLE(p);
 	}
-
-	array_init(return_value);
-	add_assoc_double(return_value, "x", x);
-	add_assoc_double(return_value, "y", y);
-	add_assoc_double(return_value, "z", z);
 }
 
 ZEND_FUNCTION(pj_is_latlong)

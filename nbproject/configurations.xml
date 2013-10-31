@@ -21,10 +21,12 @@
         <itemPath>tests/pj_is_latlong_basic.phpt</itemPath>
         <itemPath>tests/pj_is_latlong_error.phpt</itemPath>
         <itemPath>tests/pj_strerrno_basic.phpt</itemPath>
+        <itemPath>tests/pj_transform_array_count_and_offset.phpt</itemPath>
         <itemPath>tests/pj_transform_basic.phpt</itemPath>
         <itemPath>tests/pj_transform_basic_array.phpt</itemPath>
+        <itemPath>tests/pj_transform_basic_ignore_parameters.phpt</itemPath>
         <itemPath>tests/pj_transform_basic_string.phpt</itemPath>
-        <itemPath>tests/pj_transform_error.phpt</itemPath>
+        <itemPath>tests/pj_transform_basic_string_array.phpt</itemPath>
       </logicalFolder>
       <itemPath>INSTALL</itemPath>
       <itemPath>README.md</itemPath>
@@ -113,9 +115,19 @@
       </item>
       <item path="tests/pj_strerrno_basic.phpt" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="tests/pj_transform_array_count_and_offset.phpt"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="tests/pj_transform_basic.phpt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="tests/pj_transform_basic_array.phpt"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="tests/pj_transform_basic_ignore_parameters.phpt"
             ex="false"
             tool="3"
             flavor2="0">
@@ -125,7 +137,10 @@
             tool="3"
             flavor2="0">
       </item>
-      <item path="tests/pj_transform_error.phpt" ex="false" tool="3" flavor2="0">
+      <item path="tests/pj_transform_basic_string_array.phpt"
+            ex="false"
+            tool="3"
+            flavor2="0">
       </item>
     </conf>
     <conf name="Release" type="3">
@@ -182,9 +197,19 @@
       </item>
       <item path="tests/pj_strerrno_basic.phpt" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="tests/pj_transform_array_count_and_offset.phpt"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="tests/pj_transform_basic.phpt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="tests/pj_transform_basic_array.phpt"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="tests/pj_transform_basic_ignore_parameters.phpt"
             ex="false"
             tool="3"
             flavor2="0">
@@ -194,7 +219,10 @@
             tool="3"
             flavor2="0">
       </item>
-      <item path="tests/pj_transform_error.phpt" ex="false" tool="3" flavor2="0">
+      <item path="tests/pj_transform_basic_string_array.phpt"
+            ex="false"
+            tool="3"
+            flavor2="0">
       </item>
     </conf>
   </confs>
